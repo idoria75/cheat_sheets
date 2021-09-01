@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+​
+	<!-- RECORD DATASET (with infinite buffer and to a specific folder) -->
+	<node pkg="rosbag" type="record" name="rosbag_record" args="
+        /<topic1>
+        /<topic2>
+        /<...>
+        
+        -b 0 
+        -o $(env HOME)/"
+        output="screen"/>
+​
+</launch>
