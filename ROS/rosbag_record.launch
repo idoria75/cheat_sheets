@@ -8,7 +8,7 @@
         /<...>
         
         -b 0 
-        -o $(env HOME)/"
+        -o $(env HOME)/<prefix>"
         output="screen"/>
 ​
 </launch>
