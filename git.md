@@ -1,6 +1,6 @@
 # Useful Git commands
 
-## Staging files
+## Stage files
 
 ```bash
 # Stage files for commit ( or '.' for all files on the directory)
@@ -19,7 +19,7 @@ git add -p <file_name>
 References:
 [Interactive Staging](https://git-scm.com/book/en/v2/Git-Tools-Interactive-Staging)
 
-## Committing files
+## Commit files
 
 ```bash
 # Commit message
@@ -29,7 +29,7 @@ git commit -m "<commit_message>"
 git -c user.name="<name_of_author>" -c user.email="email_of_author" commit -m "<commit_message>"
 ```
 
-## Branching
+## Branch
 
 ```bash
 # List branches
@@ -66,6 +66,31 @@ git rebase --continue
 
 # To push, must force push
 git push -f
+```
+
+## Stash
+
+```bash
+# Save changes to stash
+git stash
+
+# Apply changes saved on the stash (keep changes on stack)
+git stash apply
+
+# Apply changes and remove them from the stash
+git stash pop
+
+# Show changes stashed (with their id)
+git stash list
+
+# Show files modified on most recent stash
+git stash show
+
+# Show changes to files saved on stash (git diff on stash)
+git stash show -p
+
+# Show changes to files saved on stash for a certain stash
+git stash show -p <stash_id>
 ```
 
 Sources:
