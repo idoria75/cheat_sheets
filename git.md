@@ -38,6 +38,9 @@ git branch
 # Checkout (switch) to branch
 git checkout <name_of_branch>
 
+# Checkout only a certain file from another branch
+git checkout <name_of_branch> <name_of_file>
+
 # Create a branch and checkout to the new branch (while keeping current changes)
 git checkout -b <name_of_new_branch>
 ```
