@@ -3,6 +3,13 @@
 # Function to crawl inside git repositories (sub-directories) and return their current branches.
 # Author: Will (https://unix.stackexchange.com/a/200126)
 
+# Setup:
+# save script to a file (e.g. nano git-crawler)
+# sudo cp git-crawler /usr/local/bin/
+# sudo chown $USER:$USER git-crawler
+# sudo chmod +x git-crawler
+# from any directory with git repos as sub-directories (e.g., catkin_ws/src), run: $ git-crawler
+
 function git_branches()
 {
     if [[ -z "$1" ]]; then
