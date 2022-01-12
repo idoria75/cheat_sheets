@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Function to crawl inside git repositories (sub-directories) and return their current branches.
+# Author: Ivan Doria (ivanpdoria@gmail.com)
+# Based on the work done by Will (https://unix.stackexchange.com/a/200126)
+
+# Setup:
+# save script to a file (e.g. nano git-crawler)
+# sudo cp git-crawler /usr/local/bin/
+# sudo chown $USER:$USER git-crawler
+# sudo chmod +x git-crawler
+# from any directory with git repos as sub-directories (e.g., catkin_ws/src), run: $ git-crawler
+
+function git_branches()
+{
+    cd "$1"
+
+    echo "---------------------------"
+    pwd=$PWD
+    echo "Git-Crawler Directory: $pwd"
+    echo "** Note: Do *not* rely on this information for git submodules **"
+    echo "---------------------------"
+    echo ""
+
+    for sub in *; do
+        [[ -d "${sub}/.git" ]] || continue
+        branch=$(cd "$sub"; git  branch | grep '^\*' | cut -d' ' -f2)
+        commit_hash=$(cd "$sub"; git log -1 --oneline | cut -d ' ' -f1)
+
+        unstaged_test=$(cd "$sub"; git diff-files --quiet --ignore-submodules --)
+        if [ $? -eq 1 ]
+        then
+            commit_has_unstaged="unstaged"
+        else
+            commit_has_unstaged="clean"
+        fi
+
+        echo "$sub [$branch, $commit_hash, $commit_has_unstaged]"
+    done
+}
+
+git_branches .
