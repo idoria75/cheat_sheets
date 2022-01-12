@@ -11,32 +11,51 @@
 # sudo chmod +x git-crawler
 # from any directory with git repos as sub-directories (e.g., catkin_ws/src), run: $ git-crawler
 
+# To-Do:
+# Add error message when there are no git directories on .
+# Add optional parameter for directory to be analyzed
+
 function git_branches()
 {
-    cd "$1"
+    if [[ -z "$1" ]]; then
+        echo "Usage: $FUNCNAME <dir>" >&2
+        return 1
+    fi
 
-    echo "---------------------------"
-    pwd=$PWD
-    echo "Git-Crawler Directory: $pwd"
-    echo "** Note: Do *not* rely on this information for git submodules **"
-    echo "---------------------------"
-    echo ""
+    if [[ ! -d "$1" ]]; then
+        echo "Invalid dir specified: '${1}'"
+        return 1
+    fi
 
-    for sub in *; do
-        [[ -d "${sub}/.git" ]] || continue
-        branch=$(cd "$sub"; git  branch | grep '^\*' | cut -d' ' -f2)
-        commit_hash=$(cd "$sub"; git log -1 --oneline | cut -d ' ' -f1)
+    # Subshell so we don't end up in a different dir than where we started.
+    (
 
-        unstaged_test=$(cd "$sub"; git diff-files --quiet --ignore-submodules --)
-        if [ $? -eq 1 ]
-        then
-            commit_has_unstaged="unstaged"
-        else
-            commit_has_unstaged="clean"
-        fi
+        cd "$1"
 
-        echo "$sub [$branch, $commit_hash, $commit_has_unstaged]"
-    done
+        echo "---------------------------"
+        pwd=$PWD
+        echo "Git-Crawler Directory: $pwd"
+        echo "** Note: Do *not* rely on this information for git submodules **"
+        echo "---------------------------"
+        echo ""
+
+        for sub in *; do
+            [[ -d "${sub}/.git" ]] || continue
+            branch=$(cd "$sub"; git  branch | grep '^\*' | cut -d' ' -f2)
+            commit_hash=$(cd "$sub"; git log -1 --oneline | cut -d ' ' -f1)
+
+            unstaged_test=$(cd "$sub"; git diff-files --quiet --ignore-submodules --)
+            if [ $? -eq 1 ]
+            then
+                commit_has_unstaged="unstaged"
+            else
+                commit_has_unstaged="clean"
+            fi
+
+            echo "$sub [$branch, $commit_hash, $commit_has_unstaged]"
+        done
+    
+    )
 }
 
 git_branches .
