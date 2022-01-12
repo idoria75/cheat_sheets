@@ -47,7 +47,7 @@ function git_branches()
             unstaged_test=$(cd "$sub"; git diff-files --quiet --ignore-submodules --)
             if [ $? -eq 1 ]
             then
-                commit_has_unstaged="unstaged"
+                commit_has_unstaged="local changes"
             else
                 commit_has_unstaged="clean"
             fi
