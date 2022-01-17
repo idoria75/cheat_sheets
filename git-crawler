@@ -36,7 +36,8 @@ function git_branches()
 
         echo "---------------------------"
         pwd=$PWD
-        echo "Git-Crawler. Version: $version. Directory: $pwd"
+        echo "Git-Crawler $version"
+        echo "Directory: $pwd"
         echo "** Note: Do *not* rely on this information for git submodules **"
         echo "---------------------------"
         echo ""
