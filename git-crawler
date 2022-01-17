@@ -3,7 +3,6 @@
 # Function to crawl inside git repositories (sub-directories) and return their current branches.
 # Author: Ivan Doria (ivanpdoria@gmail.com)
 # Based on the work done by Will (https://unix.stackexchange.com/a/200126)
-# Version 1.0
 
 # Setup:
 # save script to a file (e.g. nano git-crawler)
@@ -15,6 +14,8 @@
 # To-Do:
 # Add error message when there are no git directories on .
 # Add optional parameter for directory to be analyzed
+
+version="1.0"
 
 function git_branches()
 {
@@ -35,7 +36,7 @@ function git_branches()
 
         echo "---------------------------"
         pwd=$PWD
-        echo "Git-Crawler Directory: $pwd"
+        echo "Git-Crawler. Version: $version. Directory: $pwd"
         echo "** Note: Do *not* rely on this information for git submodules **"
         echo "---------------------------"
         echo ""
