@@ -3,6 +3,7 @@
 # Function to crawl inside git repositories (sub-directories) and return their current branches.
 # Author: Ivan Doria (ivanpdoria@gmail.com)
 # Based on the work done by Will (https://unix.stackexchange.com/a/200126)
+# Version 1.0
 
 # Setup:
 # save script to a file (e.g. nano git-crawler)
