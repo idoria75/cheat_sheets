@@ -44,6 +44,7 @@ function git_branches()
 
         for sub in *; do
             [[ -d "${sub}/.git" ]] || continue
+            update=$(cd "$sub"; git status 2>> /dev/null)
             branch=$(cd "$sub"; git  branch | grep '^\*' | cut -d' ' -f2)
             commit_hash=$(cd "$sub"; git log -1 --oneline | cut -d ' ' -f1)
 
